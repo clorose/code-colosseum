@@ -4,6 +4,7 @@ function DetailPage() {
   return (
     <>
       <div>Detail</div>
+      <div>D</div>
     </>
   );
 }

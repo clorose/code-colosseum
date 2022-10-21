@@ -6,7 +6,6 @@ import SignUp from "./page/SignUp";
 import WritePage from "./page/WritePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import "./App.css";
 
 function App() {
   return (
