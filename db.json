@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "username": "asd",
+      "password": "asd",
+      "passwordCheck": "asd",
+      "nickname": "asd",
+      "tier": "PLATINUM",
+      "id": "67_ZNlH"
+    },
+    {
+      "username": "ㅁㄴㅇ",
+      "password": "asd",
+      "passwordCheck": "asd",
+      "nickname": "asd",
+      "tier": "",
+      "id": "au0Ii4O"
+    },
+    {
+      "username": "",
+      "password": "",
+      "passwordCheck": "",
+      "nickname": "",
+      "tier": "",
+      "id": "ptc6KUV"
+    }
+  ],
+  "comments": [
+    {}
+  ]
+}
