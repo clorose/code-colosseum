@@ -4,6 +4,7 @@ import Login from "./page/Login";
 import MainPage from "./page/MainPage";
 import SignUp from "./page/SignUp";
 import WritePage from "./page/WritePage";
+import Comments from "./components/Comments";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Layout />
         <Routes>
+          <Route path="/card" element={<Comments />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
