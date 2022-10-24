@@ -23,6 +23,8 @@ const SignUp = () => {
   const [user, setUser] = useState(initialState);
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
+    // if ( name = usern)
+
     setUser({
       ...user,
       [name]: value,

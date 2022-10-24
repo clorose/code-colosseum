@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Layout />
         <Routes>
-          <Route path="/card" element={<Comments />} />
+          <Route path="/card/:id" element={<Comments />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
