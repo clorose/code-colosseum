@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "username": "asd",
+      "password": "asd",
+      "passwordCheck": "asd",
+      "nickname": "asd",
+      "tier": "PLATINUM",
+      "id": "67_ZNlH"
+    },
+    {
+      "username": "ㅁㄴㅇ",
+      "password": "asd",
+      "passwordCheck": "asd",
+      "nickname": "asd",
+      "tier": "",
+      "id": "au0Ii4O"
+    },
+    {
+      "username": "asd",
+      "password": "qwe",
+      "passwordCheck": "qwe",
+      "nickname": "qwe12",
+      "tier": "",
+      "id": "B7s4U_q"
+    }
+  ],
+  "comments": [
+    {
+      "comment": "123",
+      "id": 1
+    }
+  ]
+}

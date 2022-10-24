@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 const NavBar = () => {
+  const navigate = useNavigate();
   return (
     <main>
       <Container>
         <Button>
-          <HomeImage src="https://cdn.discordapp.com/attachments/1032989212271722587/1032989250540556298/logo.png"></HomeImage>
+          <HomeImage
+            onClick={() => navigate("/")}
+            src="https://cdn.discordapp.com/attachments/1032989212271722587/1032989250540556298/logo.png"
+          ></HomeImage>
         </Button>
         <Name>Sparta Colosseum</Name>
-        <LoginButton>login</LoginButton>
+        <LoginButton onClick={() => navigate("/login")}>login</LoginButton>
       </Container>
     </main>
   );
