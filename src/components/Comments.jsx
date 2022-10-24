@@ -10,13 +10,13 @@ const Comments = () => {
   const problemId = params.id;
 
   useEffect(() => {
-    dispatch(__getComments(1));
-  }, [dispatch, 1]);
+    dispatch(__getComments(problemId));
+  }, [dispatch, problemId]);
 
   const commentList = useSelector((state) => state.comments.comments);
   const initialState = {
     comment: "",
-    problemId: 1,
+    problemId: problemId,
   };
 
   const [comment, setComment] = useState(initialState);
