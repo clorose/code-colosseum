@@ -8,7 +8,7 @@ const NavBar = () => {
       <Container>
         <Button>
           <HomeImage
-            onClick={() => navigate("/main")}
+            onClick={() => navigate("/")}
             src="https://cdn.discordapp.com/attachments/1032989212271722587/1032989250540556298/logo.png"
           ></HomeImage>
         </Button>

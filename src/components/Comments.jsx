@@ -1,41 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { __addComments, __getComments } from "../redux/modules/thunk";
 
 const Comments = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const problemId = params.id;
+
+  useEffect(() => {
+    dispatch(__getComments(problemId));
+  }, [dispatch, problemId]);
+
+  const commentList = useSelector((state) => state.comments.comments);
+  const initialState = {
+    comment: "",
+    problemId: problemId,
+  };
+
+  const [comment, setComment] = useState(initialState);
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setComment({
+      ...comment,
+      [name]: value,
+    });
+  };
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    dispatch(__addComments(comment));
+    setComment(initialState);
+  };
+
   return (
     <CommentBox>
       <Comment>
-        <Input placeholder="댓글을 작성해보세요" type="text"></Input>
-        <InputButton>입력하기</InputButton>
+        <Input
+          onChange={onChangeHandler}
+          name="comment"
+          value={comment.comment}
+          placeholder="댓글을 작성해보세요"
+          type="text"
+        ></Input>
+        <InputButton onClick={onClickHandler}>입력하기</InputButton>
       </Comment>
-      <CommentList>
-        <div className="comment">
-          <UserName>
-            <div className="div">user 1</div>
-          </UserName>
-          <UserComment>
-            <div className="div2">저도 정말 잘 풀었습니다</div>
-          </UserComment>
-        </div>
-        <div className="commentButton">
-          <button className="edit">수정</button>
-          <button className="del">삭제</button>
-        </div>
-      </CommentList>
-      <CommentList>
-        <div className="comment">
-          <UserName>
-            <div className="div">user 2</div>
-          </UserName>
-          <UserComment>
-            <div className="div2">맞는데 왜 틀렸다고 뜨지;</div>
-          </UserComment>
-        </div>
-        <div className="commentButton">
-          <button className="edit">수정</button>
-          <button className="del">삭제</button>
-        </div>
-      </CommentList>
+      {commentList.map((commentList) => (
+        <CommentList>
+          <div className="comment">
+            <UserName>
+              <div className="div">user 2</div>
+            </UserName>
+            <UserComment>
+              <div className="div2">{commentList.comment}</div>
+            </UserComment>
+          </div>
+          <div className="commentButton">
+            <button className="edit">수정</button>
+            <button className="del">삭제</button>
+          </div>
+        </CommentList>
+      ))}
       <CommentList>
         <div className="comment">
           <UserName>

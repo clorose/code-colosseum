@@ -17,15 +17,18 @@
       "id": "au0Ii4O"
     },
     {
-      "username": "",
-      "password": "",
-      "passwordCheck": "",
-      "nickname": "",
+      "username": "asd",
+      "password": "qwe",
+      "passwordCheck": "qwe",
+      "nickname": "qwe12",
       "tier": "",
-      "id": "ptc6KUV"
+      "id": "B7s4U_q"
     }
   ],
   "comments": [
-    {}
+    {
+      "comment": "123",
+      "id": 1
+    }
   ]
 }
