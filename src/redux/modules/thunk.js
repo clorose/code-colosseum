@@ -29,11 +29,11 @@ export const __addUsers = createAsyncThunk(
 );
 
 export const __addComments = createAsyncThunk(
-  "comments/addComments",
+  "detail/__addComments",
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        `http://43.201.71.248:8080/api/auth/comment/${payload.problemId}`,
+        `http://localhost:3001/comments/${payload.problemId}`,
         payload.comment
       );
       return thunkAPI.fulfillWithValue(data);
@@ -44,15 +44,42 @@ export const __addComments = createAsyncThunk(
 );
 
 export const __getComments = createAsyncThunk(
-  "comments/getComment",
+  "detail/__getComments",
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://43.201.71.248:8080/api/comment/${payload}`
+        `http://localhost:3001/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteComment = createAsyncThunk(
+  "detail/__deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      await axios.delete(`http://localhost:3001/comments/${payload}`);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const __updateComment = createAsyncThunk(
+  "detail/__updateComment",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.patch(
+        `http://localhost:3001/comments/${payload.Id}`,
+        payload
+      );
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

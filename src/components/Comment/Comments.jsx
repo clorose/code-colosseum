@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { __addComments, __getComments } from "../redux/modules/thunk";
+import { __addComments, __getComments } from "../../redux/modules/thunk";
 
 const Comments = () => {
   const dispatch = useDispatch();
