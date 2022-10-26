@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { __addComments, __getComments } from "../redux/modules/thunk";
+import {
+  __addComments,
+  __getComments,
+  __deleteComment,
+  __updateComment,
+} from "../redux/modules/thunk";
 
 const Comments = () => {
   const dispatch = useDispatch();
@@ -13,11 +18,12 @@ const Comments = () => {
     dispatch(__getComments(problemId));
   }, [dispatch, problemId]);
 
-  const commentList = useSelector((state) => state.comments.comments);
   const initialState = {
     comment: "",
     problemId: problemId,
   };
+  const commentList = useSelector((state) => state.comments.comments);
+  console.log("리스트", commentList);
 
   const [comment, setComment] = useState(initialState);
   const onChangeHandler = (event) => {
@@ -32,6 +38,18 @@ const Comments = () => {
     e.preventDefault();
     dispatch(__addComments(comment));
     setComment(initialState);
+  };
+
+  const [updateMode, setUpdateMode] = useState(false);
+
+  const UpdateBtn = () => {
+    setUpdateMode(!updateMode);
+  };
+
+  const deleteBtn = (commentId) => {
+    if (!updateMode) {
+      dispatch(__deleteComment(commentId));
+    }
   };
 
   return (
@@ -57,8 +75,12 @@ const Comments = () => {
             </UserComment>
           </div>
           <div className="commentButton">
-            <button className="edit">수정</button>
-            <button className="del">삭제</button>
+            <button className="edit" onClick={UpdateBtn}>
+              {updateMode ? "취소" : "수정"}
+            </button>
+            <button className="del" onClick={() => deleteBtn(comment.id)}>
+              {updateMode ? "저장" : "삭제"}
+            </button>
           </div>
         </CommentList>
       ))}

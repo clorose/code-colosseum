@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { __getUsers, __addUsers } from "./thunk";
-
+import { __loginUser } from "./userThunk";
 const initialState = {
   users: [{}],
 };
@@ -22,6 +22,13 @@ export const users = createSlice({
       console.log(action.payload);
     },
     [__addUsers.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
+    [__loginUser.fulfilled]: (state, action) => {
+      // state.login.push(action.payload);
+      console.log("리스폰", action);
+    },
+    [__loginUser.rejected]: (state, action) => {
       state.error = action.payload;
     },
   },
