@@ -33,8 +33,8 @@ export const __addComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/comments/${payload.problemId}`,
-        payload.comment
+        `http://localhost:3001/comments`,
+        payload
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -47,9 +47,7 @@ export const __getComments = createAsyncThunk(
   "detail/__getComments",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/comments/${payload}`
-      );
+      const { data } = await axios.get(`http://localhost:3001/comments`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

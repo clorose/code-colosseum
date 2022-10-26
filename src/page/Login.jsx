@@ -14,7 +14,7 @@ const Login = () => {
 
   const [loginUser, setLoginUser] = useState(initialState);
   const onChangeHandler = (e) => {
-    const { name, value } = e.value;
+    const { name, value } = e.target;
     setLoginUser({
       ...loginUser,
       [name]: value,
@@ -26,33 +26,31 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <Login_Box>
-        <Log>로그인</Log>
-        <Id>
-          아이디{" "}
-          <Input
-            name="username"
-            value={loginUser.username}
-            onChange={onChangeHandler}
-            type="text"
-          />
-        </Id>
-        <Pw>
-          비밀번호{" "}
-          <Input
-            name="password"
-            value={loginUser.password}
-            onChange={onChangeHandler}
-            type="password"
-          />
-        </Pw>
-        <ButtonBox>
-          <Button onClick={() => navigate("/sign-up")}>회원가입</Button>
-          <Button onClick={onSubmit}>로그인</Button>
-        </ButtonBox>
-      </Login_Box>
-    </form>
+    <Login_Box>
+      <Log>로그인</Log>
+      <Id>
+        아이디
+        <Input
+          name="username"
+          value={loginUser.username}
+          onChange={onChangeHandler}
+          type="text"
+        />
+      </Id>
+      <Pw>
+        비밀번호
+        <Input
+          name="password"
+          value={loginUser.password}
+          onChange={onChangeHandler}
+          type="password"
+        />
+      </Pw>
+      <ButtonBox>
+        <Button onClick={() => navigate("/sign-up")}>회원가입</Button>
+        <Button onClick={onSubmit}>로그인</Button>
+      </ButtonBox>
+    </Login_Box>
   );
 };
 

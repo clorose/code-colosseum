@@ -25,7 +25,11 @@ export const users = createSlice({
       state.error = action.payload;
     },
     [__loginUser.fulfilled]: (state, action) => {
-      state.comments.push(action.payload);
+      // state.login.push(action.payload);
+      console.log("리스폰", action);
+    },
+    [__loginUser.rejected]: (state, action) => {
+      state.error = action.payload;
     },
   },
 });
