@@ -12,8 +12,12 @@ const RoutesComponents = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // if (!token) navigate("/login");
-    if (token && pathname === "/login") navigate("/");
+    if (!token && pathname === "/write") {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+    if (token && pathname === "/Login") navigate("/");
+    if (token && pathname === "/sign-up") navigate("/");
   }, [navigate, token, pathname]);
 
   return (

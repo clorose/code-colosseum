@@ -22,13 +22,18 @@ const Login = () => {
   };
 
   const onSubmit = () => {
-    dispatch(__loginUser(loginUser));
-
-    navigate("/");
+    dispatch(__loginUser(loginUser)).then((rst) => {
+      if (rst?.payload.data.success === false) {
+        navigate("/login");
+        console.log("rst", rst);
+      } else {
+        navigate("/");
+      }
+    });
   };
 
   return (
-    <Login_Box>
+    <LoginBox>
       <Log>로그인</Log>
       <Id>
         아이디
@@ -52,13 +57,13 @@ const Login = () => {
         <Button onClick={() => navigate("/sign-up")}>회원가입</Button>
         <Button onClick={onSubmit}>로그인</Button>
       </ButtonBox>
-    </Login_Box>
+    </LoginBox>
   );
 };
 
 export default Login;
 
-const Login_Box = styled.div`
+const LoginBox = styled.div`
   width: 700px;
   height: 400px;
   margin: 150px auto;
