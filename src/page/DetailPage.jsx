@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 function DetailPage() {
+  const { id } = useParams();
+  const uid = Number(id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getPost = async () => {
+      dispatch(getPost(["", await axios.get().data]));
+    };
+  });
   return (
     <>
-      <div>Detail</div>
-      <div>D</div>
+      {console.log(id)}
+      <div></div>
     </>
   );
 }

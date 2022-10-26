@@ -7,6 +7,7 @@ import WritePage from "./page/WritePage";
 import Comments from "./components/Comments";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
+import './App.css';
 
 function App() {
   return (
