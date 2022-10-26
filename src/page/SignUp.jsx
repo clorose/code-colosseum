@@ -31,7 +31,8 @@ const SignUp = () => {
     });
   };
 
-  // const regPw =  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+  //const regeId = "[a-z0-9]{4,12}"
+  // const regPw = "[a-z0-9]{4,32}"
   // useEffect(()=> {
   //   if (regPw.test(user.password)){
   //     setPassword(true);
