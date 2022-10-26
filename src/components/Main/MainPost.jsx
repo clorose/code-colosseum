@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import PostPage from "./PostPage";
 import HightLight from "./HighLight";
-import { __getPosts } from "../../redux/modules/mainThunk";
+import { __getPost } from "../../redux/modules/mainThunk";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainPost = () => {
@@ -11,10 +11,10 @@ const MainPost = () => {
   const { id } = useParams();
   const uid = Number(id);
   useEffect(() => {
-    dispatch(__getPosts());
+    dispatch(__getPost(id));
   }, [dispatch]);
-  const Posts = useSelector((state) => state.problems.posts);
 
+  const Posts = useSelector((state) => state.problems.post);
   return (
     <>
       <MainBody>
@@ -31,7 +31,8 @@ const MainPost = () => {
             Posts.map((data, index) => (
               <PostPage
                 key={index}
-                tier={data.tier}
+                id={index + 1}
+                tier={data.tier[0] + data.tier.slice(1).toLowerCase()}
                 title={data.title}
                 date={data.modifiedAt.slice(5, 10)}
                 like={data.likeNum}
@@ -43,6 +44,7 @@ const MainPost = () => {
     </>
   );
 };
+export default MainPost;
 const MainBody = styled.div`
   margin: 0 auto;
   width: 75%;
@@ -57,9 +59,7 @@ const PostHeader = styled.div`
   font-family: "GmarketSansMedium";
   margin: 25px auto;
 `;
-
 const PostBox = styled.div`
   display: flex;
   flex-direction: column-reverse;
 `;
-export default MainPost;

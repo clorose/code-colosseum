@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Comments from "../components/Comments";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MainPage from "../page/MainPage";
 import Login from "../page/Login";
 import SignUp from "../page/SignUp";
@@ -14,7 +13,6 @@ const Router = () => {
       <BrowserRouter>
         <Layout />
         <Routes>
-          <Route path="/card" element={<Comments />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />

@@ -9,7 +9,7 @@ const PostPage = (props) => {
   };
   return (
     <PostPageBox>
-      <Link to={`/${props.key}`} style={LinkStyle}>
+      <Link to={`/${props.id}`} style={LinkStyle}>
         <PostTitle>
           <TierImg src={require(`../../asset/${props.tier}.webp`)} />[
           {props.tier[0]}]<Title>{props.title} </Title>
