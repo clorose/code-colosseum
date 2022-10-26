@@ -1,21 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __loginUser } from "../redux/modules/userThunk";
 import styled from "styled-components";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const initialState = {
+    username: "",
+    password: "",
+  };
+
+  const [loginUser, setLoginUser] = useState(initialState);
+  const onChangeHandler = (e) => {
+    const { name, value } = e.value;
+    setLoginUser({
+      ...loginUser,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = () => {
+    dispatch(__loginUser(loginUser));
+  };
+
   return (
     <form>
       <Login_Box>
         <Log>로그인</Log>
         <Id>
-          아이디 <Input type="text" />
+          아이디{" "}
+          <Input
+            name="username"
+            value={loginUser.username}
+            onChange={onChangeHandler}
+            type="text"
+          />
         </Id>
         <Pw>
-          비밀번호 <Input type="text" />
+          비밀번호{" "}
+          <Input
+            name="password"
+            value={loginUser.password}
+            onChange={onChangeHandler}
+            type="password"
+          />
         </Pw>
         <ButtonBox>
           <Button onClick={() => navigate("/sign-up")}>회원가입</Button>
-          <Button>로그인</Button>
+          <Button onClick={onSubmit}>로그인</Button>
         </ButtonBox>
       </Login_Box>
     </form>

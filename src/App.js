@@ -4,7 +4,7 @@ import Login from "./page/Login";
 import MainPage from "./page/MainPage";
 import SignUp from "./page/SignUp";
 import WritePage from "./page/WritePage";
-import Comments from "./components/Comment/Comments";
+import Comments from "./components/Comments";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 
