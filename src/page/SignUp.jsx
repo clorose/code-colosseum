@@ -4,13 +4,16 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { __addUsers } from "../redux/modules/thunk";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [Password, setPassword] = useState(false);
-  const [validate, setValidate] = useState(false);
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const initialState = {
     username: "",
@@ -23,23 +26,14 @@ const SignUp = () => {
   const [user, setUser] = useState(initialState);
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    // if ( name = usern)
-
     setUser({
       ...user,
       [name]: value,
     });
   };
 
-  //const regeId = "[a-z0-9]{4,12}"
-  // const regPw = "[a-z0-9]{4,32}"
-  // useEffect(()=> {
-  //   if (regPw.test(user.password)){
-  //     setPassword(true);
-  //   }else{
-  //     setPassword(false);
-  //   }
-  // },[user.password])
+  const regId = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+  const regPw = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -56,10 +50,14 @@ const SignUp = () => {
           아이디
           <Input
             name="username"
-            placeholder="아이디를 입력해주세요."
+            placeholder="소문자,숫자 혼합 12자 이내"
             type="text"
             value={user.username}
             onChange={onChangeHandler}
+            // {...register("username", {
+            //   requried: true,
+            //   pattern: /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/,
+            // })}
           />
           <Idcheck>아이디를 입력해주세요.</Idcheck>
         </div>
@@ -68,7 +66,7 @@ const SignUp = () => {
           <Input
             name="password"
             onChange={onChangeHandler}
-            placeholder="숫자, 특문 1회 , 영문 2개 이상 사용하여 8자리 이상 입력"
+            placeholder="소문자, 숫자 혼합 32자 이내"
             type="password"
             value={user.password}
           />

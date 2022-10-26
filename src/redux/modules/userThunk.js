@@ -7,7 +7,9 @@ export const __loginUser = createAsyncThunk(
     try {
       // console.log(payload)
       const data = await axios.post(`http://43.201.71.248/api/login`, payload);
-      sessionStorage.setItem("Access_Token", data.headers.access_token);
+      if (data.data.success === true) {
+        sessionStorage.setItem("Access_Token", data.headers.access_token);
+      }
       const token = sessionStorage.getItem("Access_Token");
       console.log("data :", data);
       token === null
@@ -16,7 +18,6 @@ export const __loginUser = createAsyncThunk(
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("아이디,비밀번호가 일치하지 않습니다");
-
       return thunkAPI.rejectWithValue(error);
     }
   }
