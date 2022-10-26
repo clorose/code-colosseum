@@ -27,19 +27,14 @@
   ],
   "comments": [
     {
-      "comment": "123",
-      "problemId": 3700,
+      "comment": "asd",
+      "problemId": "3700",
       "id": 1
     },
     {
-      "comment": "asd",
+      "comment": "1234",
       "problemId": "3700",
       "id": 2
-    },
-    {
-      "comment": "asd",
-      "problemId": "3400",
-      "id": 3
     }
   ],
   "login": [

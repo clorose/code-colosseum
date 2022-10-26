@@ -26,6 +26,7 @@ const Comments = () => {
   console.log("리스트", commentList);
 
   const [comment, setComment] = useState(initialState);
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setComment({
@@ -42,8 +43,10 @@ const Comments = () => {
 
   const [updateMode, setUpdateMode] = useState(false);
 
+  const [showInput, setShowInput] = useState(false);
   const UpdateBtn = () => {
     setUpdateMode(!updateMode);
+    setShowInput(true);
   };
 
   const deleteBtn = (commentId) => {
@@ -51,7 +54,6 @@ const Comments = () => {
       dispatch(__deleteComment(commentId));
     }
   };
-
   return (
     <CommentBox>
       <Comment>
@@ -70,15 +72,21 @@ const Comments = () => {
             <UserName>
               <div className="div">user 2</div>
             </UserName>
-            <UserComment>
-              <div className="div2">{commentList.comment}</div>
-            </UserComment>
+            {updateMode ? (
+              <UserComment>
+                <input type="text" />
+              </UserComment>
+            ) : (
+              <UserComment>
+                <div className="div2">{commentList.comment}</div>
+              </UserComment>
+            )}
           </div>
           <div className="commentButton">
-            <button className="edit" onClick={UpdateBtn}>
+            <button className="edit" onClick={() => UpdateBtn(commentList.id)}>
               {updateMode ? "취소" : "수정"}
             </button>
-            <button className="del" onClick={() => deleteBtn(comment.id)}>
+            <button className="del" onClick={() => deleteBtn(commentList.id)}>
               {updateMode ? "저장" : "삭제"}
             </button>
           </div>
