@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const NavBar = () => {
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("Access_Token");
+
   return (
     <main>
       <Container>
@@ -13,7 +15,18 @@ const NavBar = () => {
           ></HomeImage>
         </Button>
         <Name>Sparta Colosseum</Name>
-        <LoginButton onClick={() => navigate("/login")}>login</LoginButton>
+        {token ? (
+          <LoginButton
+            onClick={() => {
+              sessionStorage.removeItem("Access_Token");
+              navigate("/login");
+            }}
+          >
+            logout
+          </LoginButton>
+        ) : (
+          <LoginButton onClick={() => navigate("/login")}>login</LoginButton>
+        )}
       </Container>
     </main>
   );

@@ -6,7 +6,7 @@ import styled from "styled-components";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const token = sessionStorage.getItem("Access_Token");
   const initialState = {
     username: "",
     password: "",
@@ -23,6 +23,8 @@ const Login = () => {
 
   const onSubmit = () => {
     dispatch(__loginUser(loginUser));
+
+    navigate("/");
   };
 
   return (

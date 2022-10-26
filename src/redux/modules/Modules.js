@@ -24,13 +24,8 @@ export const users = createSlice({
     [__addUsers.rejected]: (state, action) => {
       state.error = action.payload;
     },
-    [__loginUser.fulfilled]: (state, action) => {
-      // state.login.push(action.payload);
-      console.log("리스폰", action);
-    },
-    [__loginUser.rejected]: (state, action) => {
-      state.error = action.payload;
-    },
+    [__loginUser.fulfilled]: (state, action) => {},
+    [__loginUser.rejected]: (state, action) => {},
   },
 });
 
