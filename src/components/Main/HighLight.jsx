@@ -2,16 +2,16 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { __getPosts } from "../../redux/modules/mainThunk";
+import { __getPost } from "../../redux/modules/mainThunk";
 
 const HighLight = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const uid = Number(id);
   useEffect(() => {
-    dispatch(__getPosts());
+    dispatch(__getPost());
   }, [dispatch]);
-  const BestPost = useSelector((state) => state.problems.posts);
+  const BestPost = useSelector((state) => state.problems.post);
   const title_name = [
     `${BestPost[0]?.title}`,
     `${BestPost[1]?.title}`,
@@ -29,15 +29,6 @@ const HighLight = () => {
 };
 export default HighLight;
 
-const PostHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  outline: 1px solid;
-  padding: 10px 10px;
-  font-size: 36px;
-  font-family: "GmarketSansMedium";
-  margin: 25px auto;
-`;
 const HighLightBox = styled.div`
   text-align: center;
   display: flex;
