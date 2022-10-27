@@ -17,6 +17,7 @@ export const comments = createSlice({
   extraReducers: {
     [__getComments.fulfilled]: (state, action) => {
       state.comments = action.payload;
+      console.log(action.payload, "___________");
     },
     [__getComments.rejected]: (state, action) => {
       state.comments = action.payload;
@@ -42,6 +43,7 @@ export const comments = createSlice({
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.card = action.payload;
+      alert("작성자만 삭제 할 수 있습니다.");
     },
   },
 });
