@@ -12,7 +12,6 @@ const MainPost = () => {
   useEffect(() => {
     dispatch(__getPost(id));
   }, [dispatch]);
-  const token = sessionStorage.getItem("Access_Token");
   const Posts = useSelector((state) => state.problems.post);
   return (
     <>

@@ -11,7 +11,7 @@ const HighLight = () => {
   useEffect(() => {
     dispatch(__bestPost(id));
   }, [dispatch]);
-  const BestPost = useSelector((state) => state.problems.post);
+  const BestPost = useSelector((state) => state.problems.bestpost);
   const title_name = [
     `${BestPost[0]?.title}`,
     `${BestPost[1]?.title}`,

@@ -6,6 +6,7 @@ import SignUp from "../page/SignUp";
 import WritePage from "../page/WritePage";
 import DetailPage from "../page/DetailPage";
 import Layout from "../components/Layout";
+import DetailEdit from "../components/Detail/DetailEdit";
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/write" element={<WritePage />} />
           <Route path="/:id" element={<DetailPage />} />
+          <Route path="/:id/DetailEdit" element={<DetailEdit />} />
         </Routes>
       </BrowserRouter>
     </div>

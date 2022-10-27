@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { axiosInstance } from "../../shared/request";
 
 const URL = "http://43.201.71.248/"
 /** Post 조회 */
@@ -61,8 +62,14 @@ export const __deletePost = createAsyncThunk(
   "problems/deletePost",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`${URL}api/auth/problem`)
-      return thunkAPI.fulfillWithValue(payload);
+      await axios.delete(`${URL}api/auth/problem/${payload}`, {
+        headers: {
+          'Authorization': `${sessionStorage.getItem("Access_Token")}`,
+          'Refresh_Token': `${sessionStorage.getItem("Refresh_Token")}`,
+          'withCredentials': true,
+        }
+      });
+      return thunkAPI.fulfillWithValue({ payload });
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -73,7 +80,35 @@ export const __editPost = createAsyncThunk(
   "problems/editPost",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload)
+      const data = await axios.put(`${URL}api/auth/problem/${payload.uid}`, payload.post, {
+        headers: {
+          'Authorization': `${sessionStorage.getItem('Access_Token')}`,
+          'Refresh_Token': `${sessionStorage.getItem("Refresh_Token")}`,
+          'withCredentials': true,
+        }
+      })
+      console.log(data)
+      return thunkAPI.fulfillWithValue(data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 
+export const __likePost = createAsyncThunk(
+  "problems/likePost",
+  async (payload, thunkAPI) => {
+    try {
+      console.log(payload)
+      const data = await axios.put(`${URL}api/auth/problem/${payload}/likes`, payload.post, {
+        headers: {
+          'Authorization': `${sessionStorage.getItem('Access_Token')}`,
+          'Refresh_Token': `${sessionStorage.getItem('Refresh_Token')}`,
+          'withCredentials': true,
+        }
+      })
+      return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }

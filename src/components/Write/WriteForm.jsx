@@ -56,7 +56,6 @@ const WritePost = () => {
           value={post.content}
           onChange={onChangeHandler}
         />
-        {/* <>{console.log(post)}</> */}
         <ButtonDiv>
           <BtnStyle>글 쓰기</BtnStyle>
           <Link to="/">

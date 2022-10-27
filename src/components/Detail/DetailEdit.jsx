@@ -1,51 +1,76 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import {
   __deletePost,
   __detailPost,
-  __likePost,
+  __editPost,
 } from "../../redux/modules/mainThunk";
 import styled from "styled-components";
 import Dday from "./Dday";
 import { Link } from "react-router-dom";
 
-const DetailPages = () => {
+const DetailEdit = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const uid = Number(id);
-  const navigate = useNavigate();
   useEffect(() => {
     dispatch(__detailPost(id));
   }, [dispatch]);
   const Posts = useSelector((state) => state.problems.detailpost);
-  const onDeletePost = () => {
-    dispatch(__deletePost(uid));
-    alert("게시글 삭제");
-    navigate("/");
+  const initalState = {
+    title: "",
+    content: "",
+    imgUrl: Posts.imgUrl,
   };
-  const lovepost = () => {
-    dispatch(__likePost(uid));
+  const [post, setPost] = useState(initalState);
+
+  const onSubmitHandler = (e) => {
+    if (post.title === "" && post.content === "") {
+      e.preventDefault();
+      alert("내용을 입력하세요");
+    } else {
+      e.preventDefault();
+      dispatch(__editPost({ post, uid }));
+      alert("수정 완료");
+      // navigate(`/`);
+      // window.location.replace("/");
+    }
   };
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setPost({ ...post, [name]: value });
+  };
+
   const imgURL = Posts.imgUrl;
-  // console.log(Posts);
   return (
     <>
       <DetailTitle>
         <TitleInfo>
-          <TitleText>{Posts?.title}</TitleText>
+          <TitleText
+            placeholder={Posts?.title}
+            value={post?.title}
+            name="title"
+            onChange={onChangeHandler}
+          ></TitleText>
           <Space>
             <p>
               <TitleUser>작성자 : {Posts?.nickname}</TitleUser>
               <Dday />
-              <Btn onClick={() => navigate("./DetailEdit")}>수정</Btn>
-              <Btn onClick={onDeletePost}>삭제</Btn>
+              <Btn onClick={onSubmitHandler}>완료</Btn>
             </p>
-            <TitleLike onClick={lovepost}>❤️ {Posts?.likeNum}</TitleLike>
+            <TitleLike>❤️ {Posts?.likeNum}</TitleLike>
           </Space>
         </TitleInfo>
         <Dtailimg src={`${imgURL}`} alt={`${imgURL}`} />
-        <DetailContent>{Posts?.content}</DetailContent>
+        <DetailContent
+          placeholder={Posts?.content}
+          value={post?.content}
+          name="content"
+          onChange={onChangeHandler}
+        ></DetailContent>
       </DetailTitle>
     </>
   );
@@ -58,16 +83,18 @@ const DetailTitle = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const TitleInfo = styled.div`
+const TitleInfo = styled.form`
   outline: 1px solid;
 `;
 const Space = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const TitleText = styled.div`
+const TitleText = styled.input`
   font-family: "GmarketSansMedium";
   font-size: 36px;
+  border: none;
+  background-color: #f2f2f2;
 `;
 const TitleLike = styled.span`
   margin: 20px 20px;
@@ -76,9 +103,11 @@ const TitleLike = styled.span`
 const TitleUser = styled.span`
   font-size: 18px;
 `;
-const DetailContent = styled.div`
+const DetailContent = styled.input`
   font-size: 18px;
   margin: 10px;
+  border: none;
+  background-color: #f2f2f2;
 `;
 const Dtailimg = styled.img`
   position: relative;
@@ -89,4 +118,4 @@ const Btn = styled.button`
   padding: 10px;
   margin: 10px;
 `;
-export default DetailPages;
+export default DetailEdit;

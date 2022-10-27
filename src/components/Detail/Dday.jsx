@@ -21,10 +21,10 @@ const Dday = () => {
   // 주
   const week = day * 7;
 
-  const Posts = useSelector((state) => state.problems.post);
+  const Posts = useSelector((state) => state.problems.detailpost);
   const modiAt = Posts?.modifiedAt;
-  const Today = new Date();
-  // const Today = "2022-10-24T20:38:51.228982";
+  // const Today = new Date();
+  const Today = "2022-11-31T20:38:51.228982";
   let Dday = Date.parse(Today) - Date.parse(modiAt);
   let format = "second";
   if (Dday / week > 1) {
