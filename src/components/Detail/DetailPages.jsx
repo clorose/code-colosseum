@@ -28,24 +28,23 @@ const DetailPages = () => {
     dispatch(__likePost(uid));
   };
   const imgURL = Posts.imgUrl;
-  // console.log(Posts);
   return (
     <>
       <DetailTitle>
         <TitleInfo>
           <TitleText>{Posts?.title}</TitleText>
           <Space>
-            <p>
+            <div style={{ padding: "20px" }}>
               <TitleUser>작성자 : {Posts?.nickname}</TitleUser>
               <Dday />
               <Btn onClick={() => navigate("./DetailEdit")}>수정</Btn>
               <Btn onClick={onDeletePost}>삭제</Btn>
-            </p>
+            </div>
             <TitleLike onClick={lovepost}>❤️ {Posts?.likeNum}</TitleLike>
           </Space>
         </TitleInfo>
-        <Dtailimg src={`${imgURL}`} alt={`${imgURL}`} />
         <DetailContent>{Posts?.content}</DetailContent>
+        <Dtailimg src={`${imgURL}`} alt={`${imgURL}`} />
       </DetailTitle>
     </>
   );
@@ -66,12 +65,14 @@ const Space = styled.div`
   justify-content: space-between;
 `;
 const TitleText = styled.div`
+  padding: 10px 20px;
   font-family: "GmarketSansMedium";
   font-size: 36px;
 `;
 const TitleLike = styled.span`
   margin: 20px 20px;
   text-align: right;
+  font-size: 24px;
 `;
 const TitleUser = styled.span`
   font-size: 18px;
@@ -84,9 +85,13 @@ const Dtailimg = styled.img`
   position: relative;
   width: 50%;
   height: 50%;
+  padding: 10px;
 `;
 const Btn = styled.button`
+  font-size: 18px;
   padding: 10px;
   margin: 10px;
+  border: 0;
+  outline: 0;
 `;
 export default DetailPages;

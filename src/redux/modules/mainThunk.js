@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { axiosInstance } from "../../shared/request";
 
 const URL = "http://43.201.71.248/"
 /** Post 조회 */
@@ -88,14 +87,13 @@ export const __editPost = createAsyncThunk(
           'withCredentials': true,
         }
       })
-      console.log(data)
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
   }
 );
-
+/** 좋아요 */
 export const __likePost = createAsyncThunk(
   "problems/likePost",
   async (payload, thunkAPI) => {

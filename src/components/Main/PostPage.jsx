@@ -11,8 +11,10 @@ const PostPage = (props) => {
     <PostPageBox>
       <Link to={`/${props.id}`} style={LinkStyle}>
         <PostTitle>
-          <TierImg src={require(`../../asset/${props.tier}.webp`)} />[
-          {props.tier[0]}]<Title>{props.title} </Title>
+          <TierImg src={require(`../../asset/${props.tier}.webp`)} />
+          <Title>
+            [{props.tier[0]}]{props.title}{" "}
+          </Title>
         </PostTitle>
       </Link>
       <PostInfoBox>
@@ -31,7 +33,7 @@ const PostPageBox = styled.div`
   justify-content: space-between;
   align-items: center;
   outline: 1px solid;
-  margin: 5px;
+  margin: 10px 30px;
 `;
 const PostTitle = styled.div`
   display: flex;
@@ -45,6 +47,7 @@ const Title = styled.div`
   justify-content: center;
   text-align: center;
   padding: auto 0;
+  margin: 15px 20px;
 `;
 const PostInfoBox = styled.div`
   position: relative;

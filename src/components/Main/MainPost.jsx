@@ -21,7 +21,7 @@ const MainPost = () => {
         <PostHeader>
           모든 글
           <Link to="/write">
-            <button>글쓰기</button>
+            <Btn>글쓰기</Btn>
           </Link>
         </PostHeader>
         <PostBox>
@@ -53,13 +53,23 @@ const MainBody = styled.div`
 const PostHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  outline: 1px solid;
+  outline: 2px solid;
   padding: 10px 10px;
   font-size: 36px;
   font-family: "GmarketSansMedium";
-  margin: 25px auto;
+  margin: 30px auto;
+  padding: 10px 30px;
 `;
 const PostBox = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const Btn = styled.div`
+  margin: 20px 20px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
 `;

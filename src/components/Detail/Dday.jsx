@@ -6,7 +6,6 @@ import { __detailPost, __getPost } from "../../redux/modules/mainThunk";
 const Dday = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const uid = Number(id);
 
   useEffect(() => {
     dispatch(__detailPost(id));

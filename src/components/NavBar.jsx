@@ -5,7 +5,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("Access_Token");
   return (
-    <main>
+    <div>
       <Container>
         <Button>
           <HomeImage
@@ -13,7 +13,7 @@ const NavBar = () => {
             src="https://cdn.discordapp.com/attachments/1032989212271722587/1032989250540556298/logo.png"
           ></HomeImage>
         </Button>
-        <Name>Sparta Colosseum</Name>
+        <Name>Code Colosseum</Name>
         {token ? (
           <LoginButton
             onClick={() => {
@@ -28,7 +28,7 @@ const NavBar = () => {
           <LoginButton onClick={() => navigate("/login")}>login</LoginButton>
         )}
       </Container>
-    </main>
+    </div>
   );
 };
 

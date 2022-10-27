@@ -5,12 +5,8 @@ import Comments from "../Comments";
 import DetailPages from "./DetailPages";
 
 function Details() {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-
   return (
     <>
-      <div>{id}</div>
       <DetailPages />
       <Comments />
     </>
