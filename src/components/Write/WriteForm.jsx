@@ -31,6 +31,8 @@ const WritePost = () => {
     formData.append("content", post.content);
     formData.append("file", postImg.files[0]);
     dispatch(__addPost(formData));
+    alert("게시글 등록 완료");
+    navigate("/");
   };
   return (
     <form onSubmit={onSubmitHandler}>

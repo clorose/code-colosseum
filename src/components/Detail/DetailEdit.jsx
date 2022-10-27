@@ -34,8 +34,8 @@ const DetailEdit = () => {
       e.preventDefault();
       dispatch(__editPost({ post, uid }));
       alert("수정 완료");
-      // navigate(`/`);
-      // window.location.replace("/");
+      navigate(`/`);
+      window.location.replace("/");
     }
   };
 
