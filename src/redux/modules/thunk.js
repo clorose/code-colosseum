@@ -75,7 +75,6 @@ export const __deleteComment = createAsyncThunk(
   "detail/__deleteComment",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
       await axios.delete(`http://43.201.71.248/api/auth/comment/${payload}`, {
         headers: {
           Authorization: `${sessionStorage.getItem("Access_Token")}`,
@@ -85,6 +84,7 @@ export const __deleteComment = createAsyncThunk(
       });
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
+      alert("자기가 쓴 글만 삭제 할 수 있습니다.");
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -21,7 +21,6 @@ const Comments = () => {
   }, [dispatch, problemId]);
 
   const commentList = useSelector((state) => state.comments.comments.data);
-  console.log("리스트", commentList);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;

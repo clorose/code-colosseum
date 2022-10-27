@@ -16,7 +16,6 @@ const Comment = ({ comment, commentId }) => {
       ...inputValue,
       [name]: value,
     });
-    console.log(inputValue);
   };
 
   const UpdateBtn = () => {
@@ -32,9 +31,9 @@ const Comment = ({ comment, commentId }) => {
       dispatch(__deleteComment(commentId));
     } else if (updateMode === true) {
       dispatch(__updateComment({ comment: inputValue.comment, commentId }));
-      window.location.reload();
       setInputValue("");
     }
+    window.location.reload();
   };
 
   return (
