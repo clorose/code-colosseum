@@ -28,12 +28,17 @@ const Comment = ({ comment, commentId }) => {
       return;
     }
     if (!updateMode) {
-      dispatch(__deleteComment(commentId));
-    } else if (updateMode === true) {
-      dispatch(__updateComment({ comment: inputValue.comment, commentId }));
-      setInputValue("");
+      dispatch(__deleteComment(commentId)).then((rst) => {
+        console.log("res", rst);
+      });
+      alert("삭제되었습니다.");
     }
     window.location.reload();
+    if (updateMode === true) {
+      dispatch(__updateComment({ comment: inputValue.comment, commentId }));
+      setInputValue("");
+      alert("수정되었습니다.");
+    }
   };
 
   return (
@@ -58,14 +63,16 @@ const Comment = ({ comment, commentId }) => {
           </UserComment>
         )}
       </div>
-      <div className="commentButton">
-        <button className="edit" onClick={() => UpdateBtn()}>
-          {updateMode ? "취소" : "수정"}
-        </button>
-        <button className="del" onClick={() => deleteBtn(commentId)}>
-          {updateMode ? "저장" : "삭제"}
-        </button>
-      </div>
+      {comment.username === sessionStorage.getItem("name") ? (
+        <div className="commentButton">
+          <button className="edit" onClick={() => UpdateBtn()}>
+            {updateMode ? "취소" : "수정"}
+          </button>
+          <button className="del" onClick={() => deleteBtn(commentId)}>
+            {updateMode ? "저장" : "삭제"}
+          </button>
+        </div>
+      ) : null}
     </CommentList>
   );
 };

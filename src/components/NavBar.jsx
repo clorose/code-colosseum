@@ -19,6 +19,7 @@ const NavBar = () => {
             onClick={() => {
               sessionStorage.removeItem("Access_Token");
               sessionStorage.removeItem("Refresh_Token");
+              sessionStorage.removeItem("name");
               navigate("/login");
             }}
           >

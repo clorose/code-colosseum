@@ -9,6 +9,8 @@ export const __loginUser = createAsyncThunk(
       if (data.data.success === true) {
         sessionStorage.setItem("Access_Token", data.headers.access_token);
         sessionStorage.setItem("Refresh_Token", data.headers.refresh_token);
+        sessionStorage.setItem("name", data.data.data.username);
+        console.log("data", data.data.data.username);
       }
       const token = sessionStorage.getItem("Access_Token");
       token === null
