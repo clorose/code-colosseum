@@ -4,16 +4,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { __addUsers } from "../redux/modules/thunk";
-import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {
-    register,
-    watch,
-    formState: { errors },
-  } = useForm();
 
   const initialState = {
     username: "",
@@ -32,8 +26,8 @@ const SignUp = () => {
     });
   };
 
-  const regId = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
-  const regPw = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+  // const regId = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+  // const regPw = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -44,25 +38,20 @@ const SignUp = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <SignUp_Box>
+      <SignUpBox>
         <Sign_Up>회원가입</Sign_Up>
-        <div>
-          아이디
+        <UserBox>
+          <Span>아이디</Span>
           <Input
             name="username"
             placeholder="소문자,숫자 혼합 12자 이내"
             type="text"
             value={user.username}
             onChange={onChangeHandler}
-            // {...register("username", {
-            //   requried: true,
-            //   pattern: /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/,
-            // })}
           />
-          <Idcheck>아이디를 입력해주세요.</Idcheck>
-        </div>
-        <PW>
-          비밀번호
+        </UserBox>
+        <UserBox>
+          <Span>비밀번호</Span>
           <Input
             name="password"
             onChange={onChangeHandler}
@@ -70,10 +59,9 @@ const SignUp = () => {
             type="password"
             value={user.password}
           />
-          <Pwcheck>비밀번호 양식을 다시 한번 확인해주세요.</Pwcheck>
-        </PW>
-        <PwCheck>
-          비밀번호 확인
+        </UserBox>
+        <UserBox>
+          <Span>비밀번호 확인</Span>
           <Input
             name="passwordCheck"
             onChange={onChangeHandler}
@@ -81,19 +69,18 @@ const SignUp = () => {
             type="password"
             value={user.passwordCheck}
           />
-          <Pw_check>비밀번호가 일치하지 않습니다.</Pw_check>
-        </PwCheck>
-        닉네임
-        <Input
-          name="nickname"
-          onChange={onChangeHandler}
-          type="text"
-          value={user.nickname}
-          placeholder="닉네임을 입력해 주세요."
-        ></Input>
-        <Nickname_check>이미 존재하는 닉네임입니다.</Nickname_check>
-        <br></br>
-        티어
+        </UserBox>
+        <UserBox>
+          <Span>닉네임</Span>
+          <Input
+            name="nickname"
+            onChange={onChangeHandler}
+            type="text"
+            value={user.nickname}
+            placeholder="닉네임을 입력해 주세요."
+          ></Input>
+        </UserBox>
+        <TierTag>티어</TierTag>
         <select name="tier" onChange={onChangeHandler} value={user.tier}>
           <option>BRONZE</option>
           <option>SILVER</option>
@@ -105,14 +92,14 @@ const SignUp = () => {
         <ButtonBox>
           <Button>회원가입</Button>
         </ButtonBox>
-      </SignUp_Box>
+      </SignUpBox>
     </form>
   );
 };
 
 export default SignUp;
 
-const SignUp_Box = styled.div`
+const SignUpBox = styled.div`
   font-weight: 400px;
   width: 70%;
   height: 400px;
@@ -131,15 +118,14 @@ const Input = styled.input`
   height: 30px;
   width: 250px;
   font-size: x-small;
+  margin-right: 5%;
 `;
-
-const PW = styled.div`
-  margin-right: 17px;
+const UserBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 `;
-const PwCheck = styled.div`
-  margin-right: 53px;
-`;
-
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
@@ -157,34 +143,12 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Idcheck = styled.div`
-  color: red;
-  font-size: x-small;
-  width: 400px;
-  margin: auto;
-  padding: 0px 103px 10px 0px;
+const Span = styled.div`
+  width: 100px;
+  font-size: large;
+  margin-right: 5px;
 `;
 
-const Pwcheck = styled.div`
-  color: red;
-  font-size: x-small;
-  width: 400px;
-  margin: auto;
-  padding: 0px 5px 10px 0px;
-`;
-
-const Pw_check = styled.div`
-  color: red;
-  font-size: x-small;
-  width: 400px;
-  margin: auto;
-  padding: 0px 14px 10px 0px;
-`;
-
-const Nickname_check = styled.div`
-  color: red;
-  font-size: x-small;
-  width: 400px;
-  margin: auto;
-  padding: 0px 14.3% 0px 0px;
+const TierTag = styled.span`
+  margin-right: 20px;
 `;

@@ -21,8 +21,11 @@ export const __addUsers = createAsyncThunk(
         "http://43.201.71.248/api/signup",
         payload
       );
+      console.log("회원가입", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
+      alert("회원가입 실패(양식에 맞춰 작성해주세요!)");
+      console.log("에러", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -33,7 +36,7 @@ export const __addComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/comments`,
+        `http://43.201.71.248/api/auth/comment/{problemId}`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);
@@ -47,7 +50,9 @@ export const __getComments = createAsyncThunk(
   "detail/__getComments",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/comments`);
+      const { data } = await axios.get(
+        `http://43.201.71.248/api/comment/{problemId}`
+      );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,7 +65,7 @@ export const __deleteComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload", payload);
-      await axios.delete(`http://localhost:3001/comments/${payload}`);
+      await axios.delete(`http://43.201.71.248/api/auth/comment/{commentId}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -73,7 +78,7 @@ export const __updateComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.patch(
-        `http://localhost:3001/comments/${payload.Id}`,
+        `http://43.201.71.248/api/${payload.Id}`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);
