@@ -22,6 +22,7 @@ export const __addUsers = createAsyncThunk(
         payload
       );
       console.log("회원가입", data);
+      alert("회원가입에 성공하셨습니다!");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("회원가입 실패(양식에 맞춰 작성해주세요!)");
@@ -82,9 +83,9 @@ export const __deleteComment = createAsyncThunk(
           withCredentials: true,
         },
       });
+
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      alert("자기가 쓴 글만 삭제 할 수 있습니다.");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
