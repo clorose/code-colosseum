@@ -79,7 +79,6 @@ export const __editPost = createAsyncThunk(
   "problems/editPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload)
       const data = await axios.put(`${URL}api/auth/problem/${payload.uid}`, payload.post, {
         headers: {
           'Authorization': `${sessionStorage.getItem('Access_Token')}`,
