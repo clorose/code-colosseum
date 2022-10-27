@@ -34,6 +34,7 @@ const Comments = () => {
     e.preventDefault();
     dispatch(__addComments(comment));
     setComment(initialState);
+    window.location.reload();
   };
 
   return (
