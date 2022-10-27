@@ -1,25 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { __addPost } from "../../redux/modules/mainThunk";
 
 const WritePost = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const initalState = {
+    title: "",
+    content: "",
+  };
+
+  const [post, setPost] = useState(initalState);
+  const [img, setImg] = useState("");
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setPost({ ...post, [name]: value });
+    console.log(post);
+  };
+  const saveFileImage = (e) => {
+    setImg(URL.createObjectURL(e.target.files[0]));
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    let postImg = document.getElementById("img_file");
+    formData.append("title", post.title);
+    formData.append("content", post.content);
+    formData.append("file", postImg.files[0]);
+    dispatch(__addPost(formData));
+  };
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       <WriteBox>
-        <>
-          <InputBox placeholder="글 제목" />
-        </>
-        <>
-          <InputBox placeholder="id" />
-        </>
-        <>
-          <InputBox placeholder="파일 업로드" />
-        </>
-        <TextBox />
+        <div>
+          <InputBox
+            placeholder="글 제목"
+            name="title"
+            value={post.title}
+            onChange={onChangeHandler}
+          />
+        </div>
+        <div>
+          <input
+            type="file"
+            id="img_file"
+            accept="image/*"
+            onChange={saveFileImage}
+          />
+        </div>
+        <TextBox
+          name="content"
+          value={post.content}
+          onChange={onChangeHandler}
+        />
+        {/* <>{console.log(post)}</> */}
         <ButtonDiv>
-          <Link to="/">
-            <BtnStyle>글 쓰기</BtnStyle>
-          </Link>
+          <BtnStyle>글 쓰기</BtnStyle>
           <Link to="/">
             <BtnStyle>취소</BtnStyle>
           </Link>

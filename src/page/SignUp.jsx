@@ -95,12 +95,12 @@ const SignUp = () => {
         <br></br>
         티어
         <select name="tier" onChange={onChangeHandler} value={user.tier}>
-          <option>BRONZE</option>
-          <option>SILVER</option>
-          <option>GOLD</option>
-          <option>PLATINUM</option>
-          <option>DIAMOND</option>
-          <option>RUBY</option>
+          <option>Bronze</option>
+          <option>Silver</option>
+          <option>Gold</option>
+          <option>Platinum</option>
+          <option>Diamond</option>
+          <option>Ruby</option>
         </select>
         <ButtonBox>
           <Button>회원가입</Button>

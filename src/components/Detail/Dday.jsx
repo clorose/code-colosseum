@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { __getPost } from "../../redux/modules/mainThunk";
+import { __detailPost, __getPost } from "../../redux/modules/mainThunk";
 
 const Dday = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const uid = Number(id) - 1;
+  const uid = Number(id);
+
   useEffect(() => {
-    dispatch(__getPost(id));
+    dispatch(__detailPost(id));
   }, [dispatch]);
   const seconds = 1000;
   // 분
@@ -21,7 +22,7 @@ const Dday = () => {
   const week = day * 7;
 
   const Posts = useSelector((state) => state.problems.post);
-  const modiAt = Posts[uid]?.modifiedAt;
+  const modiAt = Posts?.modifiedAt;
   const Today = new Date();
   // const Today = "2022-10-24T20:38:51.228982";
   let Dday = Date.parse(Today) - Date.parse(modiAt);
@@ -42,6 +43,7 @@ const Dday = () => {
     Dday = Math.floor(Dday / seconds);
     format = "seconds";
   }
+  // console.log(Date.parse(modiAt));
   const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
   return (
     <>
