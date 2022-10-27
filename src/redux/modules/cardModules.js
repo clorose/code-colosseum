@@ -22,7 +22,6 @@ export const comments = createSlice({
       state.comments = action.payload;
     },
     [__addComments.fulfilled]: (state, action) => {
-      console.log("state", current(state.comments));
       state.comments.data.push(action.payload.data);
     },
     [__addComments.rejected]: (state, action) => {

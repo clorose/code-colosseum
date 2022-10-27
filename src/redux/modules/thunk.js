@@ -75,7 +75,6 @@ export const __deleteComment = createAsyncThunk(
   "detail/__deleteComment",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
       await axios.delete(`http://43.201.71.248/api/auth/comment/${payload}`, {
         headers: {
           Authorization: `${sessionStorage.getItem("Access_Token")}`,

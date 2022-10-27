@@ -26,9 +26,6 @@ const SignUp = () => {
     });
   };
 
-  // const regId = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
-  // const regPw = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
-
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(__addUsers(user));

@@ -16,7 +16,6 @@ const Comment = ({ comment, commentId }) => {
       ...inputValue,
       [name]: value,
     });
-    console.log(inputValue);
   };
 
   const UpdateBtn = () => {

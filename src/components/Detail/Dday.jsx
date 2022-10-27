@@ -23,8 +23,7 @@ const Dday = () => {
 
   const Posts = useSelector((state) => state.problems.detailpost);
   const modiAt = Posts?.modifiedAt;
-  // const Today = new Date();
-  const Today = "2022-11-31T20:38:51.228982";
+  const Today = new Date();
   let Dday = Date.parse(Today) - Date.parse(modiAt);
   let format = "second";
   if (Dday / week > 1) {
@@ -43,7 +42,6 @@ const Dday = () => {
     Dday = Math.floor(Dday / seconds);
     format = "seconds";
   }
-  // console.log(Date.parse(modiAt));
   const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
   return (
     <>
