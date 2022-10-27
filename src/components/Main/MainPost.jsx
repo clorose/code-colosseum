@@ -9,11 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 const MainPost = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const uid = Number(id);
   useEffect(() => {
     dispatch(__getPost(id));
   }, [dispatch]);
-
+  const token = sessionStorage.getItem("Access_Token");
   const Posts = useSelector((state) => state.problems.post);
   return (
     <>
@@ -30,9 +29,11 @@ const MainPost = () => {
           {Posts &&
             Posts.map((data, index) => (
               <PostPage
-                key={index}
-                id={index + 1}
-                tier={data.tier[0] + data.tier.slice(1).toLowerCase()}
+                key={data.id}
+                id={data.id}
+                tier={
+                  data.tier[0].toUpperCase() + data.tier.slice(1).toLowerCase()
+                }
                 title={data.title}
                 date={data.modifiedAt.slice(5, 10)}
                 like={data.likeNum}
@@ -61,5 +62,5 @@ const PostHeader = styled.div`
 `;
 const PostBox = styled.div`
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 `;
