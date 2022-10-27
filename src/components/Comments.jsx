@@ -2,30 +2,26 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import {
-  __addComments,
-  __getComments,
-  __deleteComment,
-  __updateComment,
-} from "../redux/modules/thunk";
+import Comment from "./Comment";
+import { __addComments, __getComments } from "../redux/modules/thunk";
 
 const Comments = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const problemId = params.id;
-
-  useEffect(() => {
-    dispatch(__getComments(problemId));
-  }, [dispatch, problemId]);
+  const problemId = parseInt(params.id);
 
   const initialState = {
     comment: "",
     problemId: problemId,
   };
-  const commentList = useSelector((state) => state.comments.comments);
-  console.log("리스트", commentList);
-
   const [comment, setComment] = useState(initialState);
+
+  useEffect(() => {
+    dispatch(__getComments(problemId));
+  }, [dispatch, problemId]);
+
+  const commentList = useSelector((state) => state.comments.comments.data);
+  console.log("리스트", commentList);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -41,22 +37,9 @@ const Comments = () => {
     setComment(initialState);
   };
 
-  const [updateMode, setUpdateMode] = useState(false);
-
-  const [showInput, setShowInput] = useState(false);
-  const UpdateBtn = () => {
-    setUpdateMode(!updateMode);
-    setShowInput(true);
-  };
-
-  const deleteBtn = (commentId) => {
-    if (!updateMode) {
-      dispatch(__deleteComment(commentId));
-    }
-  };
   return (
     <CommentBox>
-      <Comment>
+      <CommentStyle>
         <Input
           onChange={onChangeHandler}
           name="comment"
@@ -65,47 +48,10 @@ const Comments = () => {
           type="text"
         ></Input>
         <InputButton onClick={onClickHandler}>입력하기</InputButton>
-      </Comment>
-      {commentList.map((commentList) => (
-        <CommentList>
-          <div className="comment">
-            <UserName>
-              <div className="div">user 2</div>
-            </UserName>
-            {updateMode ? (
-              <UserComment>
-                <input type="text" />
-              </UserComment>
-            ) : (
-              <UserComment>
-                <div className="div2">{commentList.comment}</div>
-              </UserComment>
-            )}
-          </div>
-          <div className="commentButton">
-            <button className="edit" onClick={() => UpdateBtn(commentList.id)}>
-              {updateMode ? "취소" : "수정"}
-            </button>
-            <button className="del" onClick={() => deleteBtn(commentList.id)}>
-              {updateMode ? "저장" : "삭제"}
-            </button>
-          </div>
-        </CommentList>
-      ))}
-      <CommentList>
-        <div className="comment">
-          <UserName>
-            <div className="div">user 3</div>
-          </UserName>
-          <UserComment>
-            <div className="div2">너무 힘들어요..</div>
-          </UserComment>
-        </div>
-        <div className="commentButton">
-          <button className="edit">수정</button>
-          <button className="del">삭제</button>
-        </div>
-      </CommentList>
+      </CommentStyle>
+      {commentList?.map((comment) => {
+        return <Comment comment={comment} commentId={comment.commentId} />;
+      })}
     </CommentBox>
   );
 };
@@ -114,13 +60,13 @@ export default Comments;
 
 const CommentBox = styled.div`
   border: 0px;
-  margin: 300px auto;
+  margin: 100px auto;
   width: 800px;
   height: 900px;
   overflow: auto;
 `;
 
-const Comment = styled.div`
+const CommentStyle = styled.div`
   width: 100%;
   height: 60px;
   margin-bottom: 30px;
@@ -143,57 +89,4 @@ const InputButton = styled.button`
   color: white;
   font-size: 25px;
   cursor: pointer;
-`;
-
-const CommentList = styled.div`
-  height: 150px;
-  width: 99%;
-  display: flex;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  .comment {
-    width: 80%;
-  }
-  .commentButton {
-    width: 20%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-  }
-  .edit {
-    background-color: gray;
-    color: white;
-    border: 0px;
-    border-radius: 3px;
-    width: 40%;
-    height: 40px;
-    cursor: pointer;
-  }
-  .del {
-    background-color: gray;
-    color: white;
-    border: 0px;
-    border-radius: 3px;
-    width: 40%;
-    height: 40px;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-`;
-
-const UserName = styled.div`
-  width: 90%;
-  height: 30%;
-  margin-top: 20px;
-  margin-left: 20px;
-  font-size: 20px;
-`;
-
-const UserComment = styled.div`
-  height: 25%;
-  width: 90%;
-  margin-left: 20px;
-  margin-top: 20px;
-  font-size: 20px;
 `;
