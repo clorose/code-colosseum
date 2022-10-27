@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import {
   __getComments,
   __addComments,
@@ -7,7 +7,7 @@ import {
 } from "./thunk";
 
 const initialState = {
-  comments: [{}],
+  comments: [],
 };
 
 export const comments = createSlice({
@@ -22,7 +22,8 @@ export const comments = createSlice({
       state.comments = action.payload;
     },
     [__addComments.fulfilled]: (state, action) => {
-      state.comments.push(action.payload);
+      console.log("state", current(state.comments));
+      state.comments.data.push(action.payload.data);
     },
     [__addComments.rejected]: (state, action) => {
       state.error = action.payload;
@@ -30,12 +31,7 @@ export const comments = createSlice({
     [__updateComment.pending]: (state) => {
       state.isLoading = true;
     },
-    [__updateComment.fulfilled]: (state, action) => {
-      const target = state.comments.findIndex(
-        (comment) => comment.id === action.payload.id
-      );
-      state.comments.splice(target, 1, action.payload);
-    },
+    [__updateComment.fulfilled]: (state, action) => {},
     [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
@@ -43,13 +39,7 @@ export const comments = createSlice({
     [__deleteComment.pending]: (state) => {
       state.isLoading = true;
     },
-    [__deleteComment.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      const target = state.comments.findIndex(
-        (comment) => comment.id === action.payload
-      );
-      state.comments.splice(target, 1);
-    },
+    [__deleteComment.fulfilled]: (state, action) => {},
     [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.card = action.payload;

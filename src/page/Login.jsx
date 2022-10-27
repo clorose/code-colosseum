@@ -6,7 +6,6 @@ import styled from "styled-components";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = sessionStorage.getItem("Access_Token");
   const initialState = {
     username: "",
     password: "",
@@ -35,8 +34,9 @@ const Login = () => {
   return (
     <LoginBox>
       <Log>로그인</Log>
+
       <Id>
-        아이디
+        <IdBox>아이디</IdBox>
         <Input
           name="username"
           value={loginUser.username}
@@ -45,7 +45,7 @@ const Login = () => {
         />
       </Id>
       <Pw>
-        비밀번호
+        <IdBox>비밀번호</IdBox>
         <Input
           name="password"
           value={loginUser.password}
@@ -69,14 +69,16 @@ const LoginBox = styled.div`
   margin: 150px auto;
   text-align: center;
 `;
-
 const Log = styled.div`
   width: 100%;
   margin: 40px 0px;
   height: 60px;
   font-size: 60px;
 `;
-
+const IdBox = styled.span`
+  font-size: large;
+  margin-right: 10px;
+`;
 const Id = styled.div`
   height: 40px;
   margin-bottom: 20px;
@@ -95,9 +97,9 @@ const Input = styled.input`
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 37%;
-  margin: auto 34%;
+  justify-content: center;
+  gap: 10%;
+  margin-left: 32px;
 `;
 
 const Button = styled.button`
