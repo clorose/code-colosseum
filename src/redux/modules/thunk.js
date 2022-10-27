@@ -85,6 +85,7 @@ export const __deleteComment = createAsyncThunk(
       });
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
+      alert("자기가 쓴 글만 삭제 할 수 있습니다.");
       return thunkAPI.rejectWithValue(error.message);
     }
   }

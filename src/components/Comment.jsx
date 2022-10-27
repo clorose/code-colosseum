@@ -32,9 +32,9 @@ const Comment = ({ comment, commentId }) => {
       dispatch(__deleteComment(commentId));
     } else if (updateMode === true) {
       dispatch(__updateComment({ comment: inputValue.comment, commentId }));
-      window.location.reload();
       setInputValue("");
     }
+    window.location.reload();
   };
 
   return (
