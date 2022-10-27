@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const NavBar = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("Access_Token");
-
   return (
     <main>
       <Container>
@@ -19,6 +18,7 @@ const NavBar = () => {
           <LoginButton
             onClick={() => {
               sessionStorage.removeItem("Access_Token");
+              sessionStorage.removeItem("Refresh_Token");
               navigate("/login");
             }}
           >

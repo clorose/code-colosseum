@@ -12,7 +12,7 @@ function Details() {
     <>
       <div>{id}</div>
       <DetailPages />
-      {/* <Comments /> */}
+      <Comments />
     </>
   );
 }

@@ -9,6 +9,7 @@ export const __loginUser = createAsyncThunk(
       const data = await axios.post(`http://43.201.71.248/api/login`, payload);
       if (data.data.success === true) {
         sessionStorage.setItem("Access_Token", data.headers.access_token);
+        sessionStorage.setItem("Refresh_Token", data.headers.refresh_token);
       }
       const token = sessionStorage.getItem("Access_Token");
       console.log("data :", data);
